@@ -6,11 +6,12 @@ ALTER TABLE rooms ADD CONSTRAINT capacity_check CHECK (capacity < square);
 
 -- 3 Foreign key test
 ALTER TABLE rooms DISABLE TRIGGER ALL;
-INSERT INTO rooms(room_type_id, subdivision_id, room_number, square, capacity) VALUES
-    (5, 10, 225, 100, 20);
+INSERT INTO rooms(room_type, subdivision_id, room_number, square, capacity) VALUES
+    ('lecture hall', 10, 225, 100, 20);
 ALTER TABLE rooms ENABLE TRIGGER ALL;
 
 -- 4 Run https://github.com/EnterpriseDB/pg_catcheck
+-- We need to delete this row
 
 -- 5 When we need turn off foreign key checks? never?????
 -- 6 Add column single. Delete column.
