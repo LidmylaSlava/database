@@ -10,12 +10,13 @@ INSERT INTO rooms(room_type_id, subdivision_id, room_number, square, capacity) V
     (5, 10, 225, 100, 20);
 ALTER TABLE rooms ENABLE TRIGGER ALL;
 
--- 4
+-- 4 Run https://github.com/EnterpriseDB/pg_catcheck
 
--- 5 When we need turn off foreign key checks?
+-- 5 When we need turn off foreign key checks? never?????
 -- 6 Add column single. Delete column.
-ALTER TABLE room ADD COLUMN single VARCHAR(3) DEFAULT 'yes';
-ALTER TABLE room DROP COLUMN single;
+ALTER TABLE rooms ADD COLUMN single VARCHAR(3) DEFAULT 'yes';
+ALTER TABLE rooms DROP COLUMN single;
 
 -- 7 Rename table
 ALTER TABLE subdivisions RENAME TO sub_divisions;
+ALTER TABLE sub_divisions RENAME TO subdivisions;
