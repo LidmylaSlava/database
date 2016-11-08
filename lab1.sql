@@ -14,7 +14,7 @@ CREATE TABLE subdivision_type (
 CREATE TABLE subdivisions (
     id SERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
-    -- type_sub INTEGER REFERENCES subdivision_type(id) ON DELETE CASCADE
+    --type_sub INTEGER REFERENCES subdivision_type(id) ON DELETE CASCADE
     type_sub VARCHAR(255) NOT NULL CHECK (type_sub IN ('training room', 'administrative', 'office'))
 );
 
