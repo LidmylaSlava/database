@@ -4,13 +4,6 @@ INSERT INTO subdivisions(title, type_sub) VALUES
     ('FF', 'office');
 
 INSERT INTO rooms(room_type, subdivision_id, room_number, square, capacity) VALUES
-/*
-    (1, 1, 1, 150, 100),
-    (1, 1, 2, 200, 50),
-    (2, 1, 30, 20, 2),
-    (3, 1, 32, 50, 30),
-    (3, 1, 32, 60, 20),
-*/
     ('lecture hall', 1, 1, 150, 100),
     ('lecture hall', 1, 2, 200, 50),
     ('cabinet', 2, 30, 20, 2),
