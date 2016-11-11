@@ -11,6 +11,6 @@ GROUP BY room_type;
 
 SELECT SUM(square) FROM rooms;
 
-SELECT subdivisions.title, count(capacity)
+SELECT subdivisions.title, SUM(capacity)
 FROM subdivisions, rooms
 GROUP BY subdivisions.title;
