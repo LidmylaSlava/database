@@ -20,37 +20,3 @@ CREATE TABLE rooms_type (
     id SERIAL PRIMARY KEY,
     room_type VARCHAR(255) NOT NULL CHECK (room_type IN ('lecture hall', 'cabinet', 'laboratory'))
     );
-INSERT INTO type_subdivisions (type_sub) VALUES
-('training room'),
-('office'),
-('administrative'),
-('training room'),
-('office'),
-('administrative'),
-('training room'),
-('office'),
-('administrative');
-
-
-INSERT INTO subdivisions(title, type_sub) VALUES
-    ('IBdepartment', '1'),
-    ('APdepartment', '2'),
-    ('сryptodepartment', '3'),
-    ('deanery', '4'),
-    ('deanery', '5'),
-     ('IBdepartment', '6'),
-    ('APdepartment', '7'),
-    ('сryptodepartment', '8'),
-    ('deanery', '9'),
-    ('deanery', '10');
-    ('IBdepartment', 'administrative'),
-    ('сryptodepartment', 'training room');
-
-INSERT INTO rooms(room_number, room_type, square, capacity) VALUES
-    (108, 'lecture hall', 100, 100),
-    (18, 'cabinet', 20, 10),
-    (312, 'laboratory', 30, 30),
-    (114, 'lecture hall', 100, 100),
-    (104, 'cabinet', 15, 10),
-    (302, 'laboratory', 30, 30),
-    (116, 'lecture hall', 100, 100);
