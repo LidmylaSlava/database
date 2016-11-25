@@ -2,7 +2,7 @@
 - Вибрати назви або номери приміщень за підрозділами;
 - Підрахувати загальну площу навчальних аудиторій по приміщеннях і в цілому по навчальному закладу;
 - Підрахувати загальну кількість посадочних місць для співробітників по підрозділам.*/
-SELECT rooms.room_number NUMBER, subdivisions.title
+SELECT rooms.room_number NUMBER, subdivisions.title -- room number by subdivisions
 FROM rooms, subdivisions
 WHERE rooms.subdivision_id = subdivisions.id;
 
@@ -13,22 +13,12 @@ INNER JOIN rooms R
 ON S.id=R.subdivision_id
 GROUP BY title;
 
-SELECT SUM(square) FROM rooms R
+SELECT SUM(square) FROM rooms R -- SUM square lecture hall
 INNER JOIN rooms_type RT
 ON R.room_type_id=RT.id
 GROUP BY room_type
 HAVING room_type='lecture hall';
 
-SELECT subdivisions.title, SUM(capacity)
+SELECT subdivisions.title, SUM(capacity) -- SUM capacity by subdivisions
 FROM subdivisions, rooms
 GROUP BY subdivisions.title;
-
-SELECT NameGroup, Round(AVG(Mark),1)[Средняя оценка]
-FROM Progress P INNER JOIN Student S
-ON P.NRecordBook=S.NRecordBook
-INNER JOIN SGroup SG
-ON S.IDGroup=SG.IDGroup
-GROUP BY NameGroup
-HAVING AVG(Mark)>3
-INNER JOIN rooms_type RT
-ON R.room_type_id=RT.id
