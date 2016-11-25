@@ -11,11 +11,13 @@ FROM subdivisions S INNER JOIN type_subdivisions TS
 ON S.type_sub_id=TS.id
 INNER JOIN rooms R
 ON S.id=R.subdivision_id
-INNER JOIN rooms_type RT
-ON R.room_type_id=RT.id
 GROUP BY title;
 
-SELECT SUM(square) FROM rooms;
+SELECT SUM(square) FROM rooms R
+INNER JOIN rooms_type RT
+ON R.room_type_id=RT.id
+GROUP BY room_type
+HAVING room_type='lecture hall';
 
 SELECT subdivisions.title, SUM(capacity)
 FROM subdivisions, rooms
@@ -28,3 +30,5 @@ INNER JOIN SGroup SG
 ON S.IDGroup=SG.IDGroup
 GROUP BY NameGroup
 HAVING AVG(Mark)>3
+INNER JOIN rooms_type RT
+ON R.room_type_id=RT.id
