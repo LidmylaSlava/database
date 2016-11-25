@@ -7,7 +7,7 @@ c) Вивід списку атрибутів відношення, яке ві�
 наприклад, вивести імена студентів відмінників і назви предметів, по яким вони здавали екзамен.*/
 
 --вивести номери кімнат, ємність яких вища за середню ємність по кожному виду підрозділа 
-SELECT r.room_number, sub.title
+SELECT r.room_number, sub.title, capacity, Bcapacity
 FROM rooms r 
 INNER JOIN subdivisions sub on r.subdivision_id=sub.id
 INNER JOIN
@@ -17,17 +17,15 @@ INNER JOIN
  GROUP BY title) b
  ON r.subdivision_id=sub.id
  WHERE capacity>BCapacity;
+-- номери кімнат, площа яких максимальна
+SELECT room_number
+FROM rooms
+GROUP BY room_number
+HAVING AVG(square) = (SELECT MAX(square) FROM rooms);
 
-
-Вивести імена студентів, чиї оцінки вищі за середню оцінку їхньої групі.
-Рішення:
-SELECT S.StName,S.NRecordBook
-FROM Progress P
-          INNER JOIN Student S on P.NRecordBook=S.NRecordBook
-         INNER JOIN
-(SELECT  IDGroup, AVG(Mark) BMark
- FROM Progress P
-    INNER JOIN Student S  on P.NRecordBook=S.NRecordBook
- GROUP BY IDGroup) b
-ON S.IDGroup=b.IDGroup
-WHERE mark> BMark
+-- вивести номери кімнат ємність яких вища за середню по фті і тип назву підрозділу
+SELECT r.room_number, s.title, AVG(capacity)
+FROM rooms r
+INNER JOIN subdivisions s on r.subdivision_id=s.id
+GROUP BY r.room_number, s.title
+HAVING AVG(capacity) >= (SELECT AVG(capacity) FROM rooms);
