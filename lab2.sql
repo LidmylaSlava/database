@@ -1,7 +1,8 @@
 
 -- 1 We need to check capacity (in the case where we need 1 square m. for 1 person)
 ALTER TABLE rooms ADD CONSTRAINT capacity_check CHECK (capacity < square);
-
+ALTER TABLE rooms ADD CONSTRAINT capacity_check1 CHECK (capacity > 0);
+ALTER TABLE rooms ADD CONSTRAINT    square_check CHECK (square > 0);
 
 ALTER TABLE rooms NOCHECK CONSTRAINT Foreign Key;
 -- 2 Already done in lab1.sql
