@@ -4,7 +4,7 @@ DECLARE
   ret INTEGER;
   BEGIN
   SELECT INTO ret COUNT(r.room_number) FROM rooms r INNER JOIN subdivisions s
-  ON r.subdivision_id=s.id WHERE s.title=title;
+  ON r.subdivision_id=s.id WHERE s.title=stitle;
   RETURN ret;
   END;
   $$ language plpgsql;
