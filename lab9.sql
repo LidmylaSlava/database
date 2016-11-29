@@ -18,3 +18,20 @@ b) EXEC[UTE] sp_addlogin ‘king_of_the_db',
 c) REVOKE ALL TO ‘M_Ivanenko'
 CASCADE
 3. Зашифруйте зміст однієї з колонок таблиці в створеній БД.*/
+CREATE ROLE decanat;
+CREATE ROLE ipt LOGIN PASSWORD 'pti';
+GRANT decanat TO ipt;
+CREATE DATABASE decanat with owner = decanat;
+\connect decanat;
+CREATE SCHEMA AUTHORIZATION ipt;
+
+CREATE ROLE decanat_reader;
+GRANT SELECT, REFERENCES, TRIGGER ON ALL TABLES IN SCHEMA 'ipt' TO decanat_reader;
+
+CREATE ROLE john LOGIN PASSWORD 'qweqweqwe';
+CREATE ROLE bill LOGIN PASSWORD 'qweqweqwe';
+GRANT decanat_reader TO john;
+GRANT decanat_reader TO bill;
+
+REVOKE decanat_reader FROM bill;
+REVOKE ALL PRIVILEGES ON SCHEMA 'ipt' FROM bill;
