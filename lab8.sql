@@ -6,7 +6,7 @@
 CREATE OR REPLACE FUNCTION trig_room_delete_checker() RETURNS trigger AS
 $$
 	BEGIN
-		IF EXISTS (SELECT id FROM subdivisions WHERE id = OLD.id) THEN
+		IF EXISTS (SELECT subdivision_id FROM rooms WHERE subdivision_id = OLD.subdivision_id) THEN
             RAISE EXCEPTION 'cannot delete room, that has subdivision';
         END IF;
 	END;
