@@ -35,3 +35,15 @@ GRANT decanat_reader TO bill;
 
 REVOKE decanat_reader FROM bill;
 REVOKE ALL PRIVILEGES ON SCHEMA 'ipt' FROM bill;
+
+create extension pgcrypto;
+update rooms_type set room_type = encrypt(room_type::TEXT::BYTEA, '4234', 'aes');
+select room_type from rooms_type;
+
+update rooms_type set room_type= encode(decrypt(room_type::TEXT::BYTEA, '4234', 'aes'), 'escape');
+select room_type from rooms_type;
+
+тут temp1 - имя текстовой колонки
+'aes' - алгоритм шифрования
+'4234' - маска шифрования
+грубо говоря - ключ
