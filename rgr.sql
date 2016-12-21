@@ -7,7 +7,8 @@ CREATE TABLE building (
 CREATE TABLE height_floor (
   id SERIAL PRIMARY KEY,
   building_id INTEGER REFERENCES building(id) ON DELETE CASCADE,
-  height INTEGER NOT NULL
+  floor INTEGER NOT NULL,
+  height REAL NOT NULL
   );
 
 CREATE TABLE subdivisions (
@@ -76,4 +77,8 @@ insert into rooms(room_number,floor, square, capacity, subdivision_id, room_type
 	('216', 70, 2, 30, 11, 4, 1, 1), 
 	('217', 63, 2, 34, 1, 2, 1, 1);
 
- 
+insert into height_floor (building_id, floor, height) values
+(1, 1, 2),
+(1, 2, 2.5),
+(2, 1, 3),
+(2, 2, 5);
