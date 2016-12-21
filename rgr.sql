@@ -117,5 +117,5 @@ begin
 		return query select C.name as building, D.name as subunit from (room A inner join building B on A.building_id=B.id and B.num=bname) C inner join subunit D on C.subunit_id=D.id where D.subunit_type_id=stid;
 	end if;
 end;
-$$ language plpgsql;
+$$ language plpgsql ;
 
