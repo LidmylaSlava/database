@@ -82,3 +82,40 @@ insert into height_floor (building_id, floor, height) values
 (1, 2, 2.5),
 (2, 1, 3),
 (2, 2, 5);
+-- запросы
+create or replace function get_volume(id_ integer) returns real as $$
+declare 
+	ret real;
+begin
+	select into ret r.square*h.height from rooms r INNER JOIN
+	height_floor h ON (r.building_id=h.building_id and r.floor=h.floor) where r.id=id_;
+	return ret;
+end;
+$$ language plpgsql;
+
+create or replace function get_subdivision_count_in_building(bnumber varchar(100), sub_id integer) returns integer as $$
+declare 
+	ret integer;
+begin
+	if sub_id is null then
+		select into ret count(distinct subdivision_id) from rooms r inner join building b on r.building_id=b.id
+		and b.build_number=bnumber;
+	else
+		select into ret count(distinct subdivision_id) from (rooms r inner join building b on r.building_id=b.id 
+		and b.build_number=bnumber) c inner join subdivisions s on c.subdivision_id=s.id where s.type_sub_id=sub_id;
+	end if;
+	return ret;
+end;
+$$ language plpgsql;
+select get_subdivision_count_in_building('11', 3);
+
+create or replace function get_subunits_name_in_building(bname varchar(100), stid integer) returns table(building varchar(100), subunit varchar(100)) as $$
+begin
+	if stid is null then
+		return query select C.name as building, D.name as subunit from (room A inner join building B on A.building_id=B.id and B.num=bname) C inner join subunit D on C.subunit_id=D.id;
+	else
+		return query select C.name as building, D.name as subunit from (room A inner join building B on A.building_id=B.id and B.num=bname) C inner join subunit D on C.subunit_id=D.id where D.subunit_type_id=stid;
+	end if;
+end;
+$$ language plpgsql;
+
